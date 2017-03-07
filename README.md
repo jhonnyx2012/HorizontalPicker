@@ -16,8 +16,25 @@ DatePicker horizontal con selección smooth por día.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplos de uso
-1- Declara un HorizontalPicker en tu layout de la siguiente manera:
+1- Añade el repositorio a tu proyecto
 
+```groovie
+    repositories {
+    maven {
+        url  "http://dl.bintray.com/jhonnyx2012/HorizontalPicker" 
+    }
+}
+```  
+
+2- Añade la dependencia
+
+```groovie
+ dependencies {
+    compile 'com.github.jhonnyx2012:horizontal-picker:1.0.0'
+}
+```  
+
+3- Declara un HorizontalPicker en tu layout de la siguiente manera:
 ```xml
  <com.jhonnyx.horizontalpicker.HorizontalPicker
         android:id="@+id/datePicker"
@@ -25,7 +42,7 @@ DatePicker horizontal con selección smooth por día.
         android:layout_height="wrap_content"/>
 ```
 
-2- Setea un listener al HorizontalPicker para escuchar los cambios de fecha e inicia el picker.
+4- Setea un listener al HorizontalPicker para escuchar los cambios de fecha e inicia el picker.
 
 ```java
 public class MainActivity extends AppCompatActivity implements DatePickerListener {
@@ -47,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
 }
 ```
 
-3- Tambien puedes configurar la cantidad de dias a generar, el offset y setear una fecha directmente al picker.
+5- Tambien puedes configurar la cantidad de dias a generar, el offset y setear una fecha directamente al picker.
 
 ```java
     picker
