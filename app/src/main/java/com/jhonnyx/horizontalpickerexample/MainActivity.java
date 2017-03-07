@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
         HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
         picker
                 .setListener(this)
-                .setDays(20)
-                .setOffset(10)
+                .setDays(120)
+                .setOffset(7)
                 .init();
-        picker.setDate(new DateTime().plusDays(4));
+        picker.setDate(new DateTime());
     }
 
     @Override
