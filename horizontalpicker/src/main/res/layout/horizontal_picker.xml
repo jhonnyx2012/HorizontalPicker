@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:paddingBottom="8dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvToday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/today"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_gravity="right"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp" />
+        <TextView
+            android:id="@+id/tvMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_gravity="center"
+            android:textColor="@color/primaryTextColor"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.jhonnyx.horizontalpicker.HorizontalPickerRecyclerView
+        android:id="@+id/rvDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="17dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="3"
+                android:layout_height="match_parent"/>
+            <FrameLayout
+                android:id="@+id/vHover"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/background_day_hover"
+                android:layout_height="match_parent"
+                android:visibility="invisible" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="3"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
