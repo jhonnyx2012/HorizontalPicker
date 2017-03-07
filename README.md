@@ -57,5 +57,3 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
           .init();
     picker.setDate(new DateTime().plusDays(4));
 ```
-
-3- Chupala!
