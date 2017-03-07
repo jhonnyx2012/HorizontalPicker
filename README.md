@@ -2,14 +2,14 @@
 DatePicker horizontal con selección smooth por día.
 
 ## Caracteristicas
-* Smooth swipe para cambio de día.
+* Selección de fecha con smooth swipe.
 * Selección de fecha clickando un dia.
+* Selección de fecha desde el objeto HorizontalPicker.
 * Vista de mes y año.
 * Botón Today para seleccionar el día actual de manera rapida.
 * Días de la semana y meses en el idioma por defecto.
-* Configuración de día inicial.
 * Configuración de cantidad de dias a generar (Default 120).
-* Configuración de offset de dias a generar antes del dia de inicio (Default 7).
+* Configuración de offset de dias a generar antes del dia actual (Default 7).
 
 ## NOTAS:
 * De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 500.
