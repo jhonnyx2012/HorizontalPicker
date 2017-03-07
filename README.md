@@ -11,25 +11,22 @@ DatePicker horizontal con selección smooth por día.
 * Configuración de cantidad de dias a generar (Default 120).
 * Configuración de offset de dias a generar antes del dia actual (Default 7).
 
-## Notas:
+## Notas
 * De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 500.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplos de uso
-1- Añade el repositorio a tu proyecto
+1- Añade el repositorio y la dependencia a tu proyecto
 
 ```groovie
-    repositories {
+repositories {
     maven {
         url  "http://dl.bintray.com/jhonnyx2012/HorizontalPicker" 
     }
 }
-```  
+....
 
-2- Añade la dependencia
-
-```groovie
- dependencies {
+dependencies {
     compile 'com.github.jhonnyx2012:horizontal-picker:1.0.0'
 }
 ```  
