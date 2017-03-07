@@ -57,3 +57,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
           .init();
     picker.setDate(new DateTime().plusDays(4));
 ```
+## Screenshot
+
+![Screenshot](https://raw.githubusercontent.com/jhonnyx2012/HorizontalPicker/master/Screenshot.jpeg)
