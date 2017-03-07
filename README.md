@@ -1,7 +1,7 @@
 # HorizontalPicker
 DatePicker horizontal con selección smooth por día.
 
-## Caracteristicas
+## Características
 * Selección de fecha con smooth swipe.
 * Selección de fecha clickando un dia.
 * Selección de fecha desde el objeto HorizontalPicker.
@@ -11,11 +11,11 @@ DatePicker horizontal con selección smooth por día.
 * Configuración de cantidad de dias a generar (Default 120).
 * Configuración de offset de dias a generar antes del dia actual (Default 7).
 
-## NOTAS:
+## Notas:
 * De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 500.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
-## Ejemplo de uso
+## Ejemplos de uso
 1- Declara un HorizontalPicker en tu layout de la siguiente manera:
 
 ```xml
@@ -57,6 +57,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
           .init();
     picker.setDate(new DateTime().plusDays(4));
 ```
-## Screenshot
+## Screenshots
 
 ![Screenshot](https://raw.githubusercontent.com/jhonnyx2012/HorizontalPicker/master/Screenshot.jpeg)
