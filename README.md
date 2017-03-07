@@ -16,7 +16,7 @@ DatePicker horizontal con selección smooth por día.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplo de uso
-1. Declarar un HorizontalPicker en tu layout de la siguiente manera:
+1- Declarar un HorizontalPicker en tu layout de la siguiente manera:
 
 ```xml
  <com.jhonnyx.horizontalpicker.HorizontalPicker
@@ -25,7 +25,7 @@ DatePicker horizontal con selección smooth por día.
         android:layout_height="wrap_content"/>
 ```
 
-2. Setear un listener al HorizontalPicker para escuchar los cambios de fecha
+2- Setear un listener al HorizontalPicker para escuchar los cambios de fecha e inicia el picker.
 
 ```java
 public class MainActivity extends AppCompatActivity implements DatePickerListener {
@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
-        picker.setListener(this);
-        picker.setDate(new DateTime().plusMonths(1));
+        picker
+                .setListener(this)
+                .init();
     }
 
     @Override
@@ -46,4 +47,29 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
 }
 ```
 
-3. Chupala!
+3- Tambien puedes configurar la cantidad de dias a generar, el offset y setear una fecha directmente al picker.
+
+```java
+public class MainActivity extends AppCompatActivity implements DatePickerListener {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
+        picker
+                .setListener(this)
+                .setDays(20)
+                .setOffset(10)
+                .init();
+        picker.setDate(new DateTime().plusDays(4));
+    }
+
+    @Override
+    public void onDateSelected(DateTime dateSelected) {
+        Log.i("HorizontalPicker","Fecha seleccionada="+dateSelected.toString());
+    }
+}
+```
+
+3- Chupala!
