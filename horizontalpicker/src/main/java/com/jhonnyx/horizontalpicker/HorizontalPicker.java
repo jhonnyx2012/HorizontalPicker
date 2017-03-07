@@ -16,22 +16,34 @@ import org.joda.time.DateTime;
 
 public class HorizontalPicker extends LinearLayout implements HorizontalPickerListener{
 
+    private static final int NO_SETTED = -1;
     private View vHover;
     private TextView tvMonth;
     private TextView tvToday;
     private DatePickerListener listener;
     private HorizontalPickerRecyclerView rvDays;
+    private int days;
+    private int offset;
 
     public HorizontalPicker(Context context) {
-        super(context);init();
+        super(context);
+        internInit();
     }
 
     public HorizontalPicker(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);init();
+        super(context, attrs);
+        internInit();
+
     }
 
     public HorizontalPicker(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);init();
+        super(context, attrs, defStyle);
+        internInit();
+    }
+
+    private void internInit() {
+        this.days = NO_SETTED;
+        this.offset = NO_SETTED;
     }
 
     public HorizontalPicker setListener(DatePickerListener listener)
@@ -40,19 +52,30 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
         return this;
     }
 
-    public void setDate(DateTime date)
+    public void setDate(final DateTime date)
     {
-        rvDays.setDate(date);
+        rvDays.post(new Runnable() {
+            @Override
+            public void run() {
+                rvDays.setDate(date);
+            }
+        });
     }
 
-    private void init() {
+
+    public void init() {
         inflate(getContext(),R.layout.horizontal_picker,this);
         rvDays = (HorizontalPickerRecyclerView) findViewById(R.id.rvDays);
+        int DEFAULT_DAYS_TO_PLUS = 120;
+        int finalDays=days==NO_SETTED? DEFAULT_DAYS_TO_PLUS :days;
+        int DEFAULT_INITIAL_OFFSET = 7;
+        int finalOffset=offset==NO_SETTED? DEFAULT_INITIAL_OFFSET :offset;
         vHover=findViewById(R.id.vHover);
         tvMonth=(TextView) findViewById(R.id.tvMonth);
         tvToday=(TextView) findViewById(R.id.tvToday);
         rvDays.setListener(this);
         tvToday.setOnClickListener(rvDays);
+        rvDays.init(getContext(),finalDays,finalOffset);
     }
 
     @Override
@@ -82,4 +105,21 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
         }
     }
 
+    public HorizontalPicker setDays(int days) {
+        this.days = days;
+        return this;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public HorizontalPicker setOffset(int offset) {
+        this.offset = offset;
+        return this;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
 }

@@ -23,23 +23,20 @@ import java.util.Date;
 public class HorizontalPickerAdapter extends RecyclerView.Adapter<HorizontalPickerAdapter.ViewHolder> {
 
     private static final long DAY_MILLIS = AlarmManager.INTERVAL_DAY;
-    private static final int DAYS_TO_PLUS = 120;
-    public static final int INITIAL_OFFSET = 7;
-    private final int itemWidth;
+    private int itemWidth;
     private final OnItemClickedListener listener;
     private final int primaryTextColor;
     private ArrayList<Day> items;
 
-    public HorizontalPickerAdapter(int itemWidth, OnItemClickedListener listener, Context context) {
+    public HorizontalPickerAdapter(int itemWidth, OnItemClickedListener listener, Context context,int daysToCreate,int offset) {
         items=new ArrayList<>();
         this.itemWidth=itemWidth;
-        long initialDay=new DateTime().minusDays(INITIAL_OFFSET).getMillis();
         this.listener=listener;
-        generateDays(DAYS_TO_PLUS,initialDay,false);
         this.primaryTextColor=context.getResources().getColor(R.color.primaryTextColor);
+        generateDays(daysToCreate,new DateTime().minusDays(offset).getMillis(),false);
     }
 
-    private void generateDays(int n, long initialDate, boolean cleanArray) {
+    public  void generateDays(int n, long initialDate, boolean cleanArray) {
         if(cleanArray)
             items.clear();
         int i=0;

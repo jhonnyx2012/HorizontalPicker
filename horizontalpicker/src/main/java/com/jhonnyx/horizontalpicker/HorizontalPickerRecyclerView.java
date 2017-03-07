@@ -27,34 +27,36 @@ public class HorizontalPickerRecyclerView extends RecyclerView implements OnItem
     private LinearLayoutManager layoutManager;
     private float itemWidth;
     private HorizontalPickerListener listener;
+    private int offset;
 
     public HorizontalPickerRecyclerView(Context context) {
-        super(context);init(context);
+        super(context);
     }
 
     public HorizontalPickerRecyclerView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);init(context);
+        super(context, attrs);
     }
 
     public HorizontalPickerRecyclerView(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);init(context);
+        super(context, attrs, defStyle);
     }
 
-    private void init(Context context) {
+    public void init(Context context, final int daysToPlus, final int initialOffset) {
+        this.offset=initialOffset;
         layoutManager=new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         setLayoutManager(layoutManager);
         post(new Runnable() {
             @Override
             public void run() {
                 itemWidth=getMeasuredWidth()/7;
-                adapter=new HorizontalPickerAdapter((int) itemWidth,HorizontalPickerRecyclerView.this, getContext());
+                adapter=new HorizontalPickerAdapter((int) itemWidth,HorizontalPickerRecyclerView.this, getContext(),daysToPlus,initialOffset);
                 setAdapter(adapter);
                 LinearSnapHelper snapHelper=new LinearSnapHelper();
                 snapHelper.attachToRecyclerView(HorizontalPickerRecyclerView.this);
+                removeOnScrollListener(onScrollListener);
                 addOnScrollListener(onScrollListener);
             }
         });
-
     }
 
     private OnScrollListener onScrollListener=new OnScrollListener() {
@@ -127,7 +129,7 @@ public class HorizontalPickerRecyclerView extends RecyclerView implements OnItem
     public void setDate(DateTime date) {
         DateTime today = new DateTime().withTime(0,0,0,0);
         int difference = Days.daysBetween(date,today).getDays() * (date.getYear() < today.getMillis() ? -1 : 1);
-        smoothScrollToPosition(HorizontalPickerAdapter.INITIAL_OFFSET+difference);
+        smoothScrollToPosition(offset+difference);
     }
 
     private static class CenterSmoothScroller extends LinearSmoothScroller {
