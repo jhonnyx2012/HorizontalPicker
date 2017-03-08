@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
 
 ![Screenshot](https://raw.githubusercontent.com/jhonnyx2012/HorizontalPicker/master/Screenshot.jpeg)
 
-## Screenshots
+## License
 ```text
   Copyright 2017 Jhonny Barrios
 
