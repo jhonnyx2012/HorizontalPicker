@@ -27,13 +27,13 @@ repositories {
 ....
 
 dependencies {
-    compile 'com.github.jhonnyx2012:horizontal-picker:1.0.0'
+    compile 'com.github.jhonnyx2012:horizontal-picker:1.0.5'
 }
 ```  
 
 3- Declara un HorizontalPicker en tu layout de la siguiente manera:
 ```xml
- <com.jhonnyx.horizontalpicker.HorizontalPicker
+ <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
         android:id="@+id/datePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
