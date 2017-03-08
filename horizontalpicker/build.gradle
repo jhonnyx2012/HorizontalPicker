@@ -1,4 +1,29 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+ext {
+    bintrayRepo = 'HorizontalPicker'
+    bintrayName = 'HorizontalPicker'
+
+    publishedGroupId = 'com.github.jhonnyx2012'
+    libraryName = 'HorizontalPicker'
+    artifact = 'horizontal-picker'
+
+    libraryDescription = 'DatePicker horizontal con selección smooth por día'
+
+    siteUrl = 'https://github.com/jhonnyx2012/HorizontalPicker'
+    gitUrl = 'https://github.com/jhonnyx2012/HorizontalPicker.git'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'jhonnyx2012'
+    developerName = 'Jhonny Barrios'
+    developerEmail = 'jhonnyx2012@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 25
@@ -8,7 +33,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -21,5 +46,25 @@ android {
 dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'joda-time:joda-time:2.9.7'
-
 }
+
+task writeNewPom << {
+    pom {
+        project {
+            groupId 'com.github.jhonnyx2012'
+            artifactId 'horizontal-picker'
+            version '1.0.1'
+
+            inceptionYear '2017'
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+        }
+    }.writeTo("$buildDir/1.0.1.pom.xml")
+}
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

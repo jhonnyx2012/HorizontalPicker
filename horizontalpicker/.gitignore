@@ -1,1 +1,6 @@
-/build
+/build/docs
+/build/generated
+/build/intermediates
+/build/libs
+/build/outputs
+/build/tmp
