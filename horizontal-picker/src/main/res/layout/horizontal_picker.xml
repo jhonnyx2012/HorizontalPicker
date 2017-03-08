@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.jhonnyx.horizontalpicker.HorizontalPickerRecyclerView
+        <com.github.jhonnyx2012.horizontalpicker.HorizontalPickerRecyclerView
         android:id="@+id/rvDays"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

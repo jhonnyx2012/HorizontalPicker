@@ -1,1 +1,1 @@
-include ':app', ':horizontalpicker'
+include ':app', ':horizontal-picker'

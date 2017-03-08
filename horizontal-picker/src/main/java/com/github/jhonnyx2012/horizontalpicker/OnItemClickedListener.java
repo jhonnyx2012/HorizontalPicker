@@ -1,4 +1,4 @@
-package com.jhonnyx.horizontalpicker;
+package com.github.jhonnyx2012.horizontalpicker;
 
 import android.view.View;
 

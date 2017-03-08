@@ -19,6 +19,6 @@ android {
 }
 
 dependencies {
-    compile project(':horizontalpicker')
+    compile project(':horizontal-picker')
     compile 'com.android.support:appcompat-v7:25.1.1'
 }

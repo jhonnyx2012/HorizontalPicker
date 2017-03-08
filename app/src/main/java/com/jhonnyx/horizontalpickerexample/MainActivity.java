@@ -3,8 +3,11 @@ package com.jhonnyx.horizontalpickerexample;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import com.jhonnyx.horizontalpicker.DatePickerListener;
-import com.jhonnyx.horizontalpicker.HorizontalPicker;
+
+
+import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
+import com.github.jhonnyx2012.horizontalpicker.HorizontalPicker;
+
 import org.joda.time.DateTime;
 
 public class MainActivity extends AppCompatActivity implements DatePickerListener {
