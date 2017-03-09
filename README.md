@@ -24,7 +24,7 @@ dependencies {
 }
 ```  
 
-3- Declara un HorizontalPicker en tu layout de la siguiente manera:
+2- Declara un HorizontalPicker en tu layout de la siguiente manera:
 ```xml
  <com.github.jhonnyx2012.horizontalpicker.HorizontalPicker
         android:id="@+id/datePicker"
@@ -32,7 +32,7 @@ dependencies {
         android:layout_height="wrap_content"/>
 ```
 
-4- Setea un listener al HorizontalPicker para escuchar los cambios de fecha e inicia el picker.
+3- Setea un listener al HorizontalPicker para escuchar los cambios de fecha e inicia el picker.
 
 ```java
 public class MainActivity extends AppCompatActivity implements DatePickerListener {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
 }
 ```
 
-5- Tambien puedes configurar la cantidad de dias a generar, el offset y setear una fecha directamente al picker.
+4- Tambien puedes configurar la cantidad de dias a generar, el offset y setear una fecha directamente al picker.
 
 ```java
     picker
