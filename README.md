@@ -16,16 +16,9 @@ DatePicker horizontal con selección smooth por día.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplos de uso
-1- Añade el repositorio y la dependencia a tu proyecto
+1- Añade la dependencia a tu proyecto
 
 ```groovie
-repositories {
-    maven {
-        url  "http://dl.bintray.com/jhonnyx2012/HorizontalPicker" 
-    }
-}
-....
-
 dependencies {
     compile 'com.github.jhonnyx2012:horizontal-picker:1.0.5'
 }
