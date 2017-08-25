@@ -1,6 +1,12 @@
 # HorizontalPicker
 DatePicker horizontal con selección smooth por día.
 
+[DESCARGA EL DEMO AQUÍ](https://github.com/jhonnyx2012/HorizontalPicker/blob/master/appDemoDebug.apk?raw=true)
+
+## Screenshots
+
+![Screenshot](https://raw.githubusercontent.com/jhonnyx2012/HorizontalPicker/master/Screenshot_custom.png)
+
 ## Características
 * Selección de fecha con smooth swipe.
 * Selección de fecha clickando un dia.
@@ -13,7 +19,6 @@ DatePicker horizontal con selección smooth por día.
 * Puedes customizar los colores o dejar que HorizontalPicker tome los colores de la paleta de tu proyecto.
 
 ## Notas
-* De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 1000.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplos de uso
@@ -76,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
     picker.setBackgroundColor(Color.LTGRAY);
     picker.setDate(new DateTime().plusDays(4));
 ```
-## Screenshots
-
-![Screenshot](https://raw.githubusercontent.com/jhonnyx2012/HorizontalPicker/master/Screenshot_custom.png)
 
 ## License
 ```text
