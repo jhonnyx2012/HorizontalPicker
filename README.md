@@ -13,7 +13,7 @@ DatePicker horizontal con selección smooth por día.
 * Puedes customizar los colores o dejar que HorizontalPicker tome los colores de la paleta de tu proyecto.
 
 ## Notas
-* De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 500.
+* De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 1000.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
 
 ## Ejemplos de uso
@@ -21,7 +21,7 @@ DatePicker horizontal con selección smooth por día.
 
 ```groovie
 dependencies {
-    compile 'com.github.jhonnyx2012:horizontal-picker:1.0.5'
+    compile 'com.github.jhonnyx2012:horizontal-picker:1.0.6'
 }
 ```  
 
