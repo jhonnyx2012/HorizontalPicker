@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textAlignment="center"
+        android:gravity="center"
         android:id="@+id/tvDay"
         android:layout_gravity="center"
         android:textColor="@color/primaryTextColor"
@@ -33,5 +34,4 @@
         android:paddingTop="6dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp" />
-
 </LinearLayout>

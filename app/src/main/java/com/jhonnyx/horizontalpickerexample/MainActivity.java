@@ -1,9 +1,7 @@
 package com.jhonnyx.horizontalpickerexample;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.github.jhonnyx2012.horizontalpicker.DatePickerListener;
@@ -13,27 +11,26 @@ import org.joda.time.DateTime;
 
 public class MainActivity extends AppCompatActivity implements DatePickerListener {
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
         picker.setListener(this)
-                .setDateSelectedColor(Color.DKGRAY)
+                /*.setDateSelectedColor(Color.DKGRAY)
                 .setDateSelectedTextColor(Color.WHITE)
                 .setMonthAndYearTextColor(Color.DKGRAY)
-                .setTodayButtonTextColor(getColor(R.color.colorPrimary))
-                .setTodayDateTextColor(getColor(R.color.colorPrimary))
-                //.setTodayDateBackgroundColor(Color.GRAY)
+                .setTodayButtonTextColor(getResources().getColor(R.color.colorPrimary))
+                .setTodayDateTextColor(getResources().getColor(R.color.colorPrimary))
+                .setTodayDateBackgroundColor(Color.GRAY)
                 .setUnselectedDayTextColor(Color.DKGRAY)
                 .setDayOfWeekTextColor(Color.DKGRAY )
-                .setUnselectedDayTextColor(getColor(R.color.primaryTextColor))
-                .showTodayButton(true)
+                .setUnselectedDayTextColor(getResources().getColor(R.color.primaryTextColor))
+                .showTodayButton(false)*/
                 .setDays(120)
                 .setOffset(7)
                 .init();
-        picker.setBackgroundColor(Color.LTGRAY);
+        //picker.setBackgroundColor(Color.LTGRAY);
         picker.setDate(new DateTime());
     }
 
