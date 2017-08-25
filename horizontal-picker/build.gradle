@@ -8,12 +8,12 @@ ext {
     libraryName = 'HorizontalPicker'
     artifact = 'horizontal-picker'
 
-    libraryDescription = 'DatePicker horizontal con selección smooth por día'
+    libraryDescription = 'Horizontal datepicker with smooth selection by day'
 
     siteUrl = 'https://github.com/jhonnyx2012/HorizontalPicker'
     gitUrl = 'https://github.com/jhonnyx2012/HorizontalPicker.git'
 
-    libraryVersion = '1.0.5'
+    libraryVersion = '1.0.6'
 
     developerId = 'jhonnyx2012'
     developerName = 'Jhonny Barrios'
@@ -32,7 +32,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0.5"
+        versionName "1.0.6"
     }
     buildTypes {
         release {

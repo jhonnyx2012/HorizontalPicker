@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
         setContentView(R.layout.activity_main);
         HorizontalPicker picker= (HorizontalPicker) findViewById(R.id.datePicker);
         picker.setListener(this)
-                /*.setDateSelectedColor(Color.DKGRAY)
+                .setDays(120)
+                .setOffset(7)
+                .setDateSelectedColor(Color.DKGRAY)
                 .setDateSelectedTextColor(Color.WHITE)
                 .setMonthAndYearTextColor(Color.DKGRAY)
                 .setTodayButtonTextColor(getResources().getColor(R.color.colorPrimary))
@@ -26,11 +28,9 @@ public class MainActivity extends AppCompatActivity implements DatePickerListene
                 .setUnselectedDayTextColor(Color.DKGRAY)
                 .setDayOfWeekTextColor(Color.DKGRAY )
                 .setUnselectedDayTextColor(getResources().getColor(R.color.primaryTextColor))
-                .showTodayButton(false)*/
-                .setDays(120)
-                .setOffset(7)
+                .showTodayButton(false)
                 .init();
-        //picker.setBackgroundColor(Color.LTGRAY);
+        picker.setBackgroundColor(Color.LTGRAY);
         picker.setDate(new DateTime());
     }
 
