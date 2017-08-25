@@ -12,21 +12,6 @@ DatePicker horizontal con selección smooth por día.
 * Configuración de offset de dias a generar antes del dia actual (Default 7).
 * Puedes customizar los colores o dejar que HorizontalPicker tome los colores de la paleta de tu proyecto.
 
-## Customización de:
-* Color del background de la fecha seleccionada.
-* Color del texto de la fecha seleccionada.
-* Color del texto del mes y año.
-* Color del texto del botón "Hoy".
-* Color del background del día de hoy.
-* Color del texto del día de hoy.
-* Color del background del día de hoy.
-* Color del texto las fechas no seleccionadas.
-* Color del texto de los días de la semana.
-* Color de la fecha seleccionada.
-* Color de la fecha seleccionada.
-* Opción de mostrar o no el botón "Hoy".
-* Color del background del calendario.
-
 ## Notas
 * De momento, solo es posible generar una cantidad finita de dias y este numero se genera en el hilo principal, por lo cual es recomendable no usar un numero mayor a 500.
 * Este proyecto utiliza la libreria [JodaTime](https://github.com/JodaOrg/joda-time) para el manejo de las fechas.
