@@ -24,6 +24,7 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
     private TextView tvMonth;
     private TextView tvToday;
     private DatePickerListener listener;
+    private OnTouchListener monthListener;
     private HorizontalPickerRecyclerView rvDays;
     private int days;
     private int offset;
@@ -64,6 +65,11 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
         return this;
     }
 
+    public HorizontalPicker setMonthListener(OnTouchListener listener) {
+        this.monthListener = listener;
+        return this;
+    }
+
     public void setDate(final DateTime date) {
         rvDays.post(new Runnable() {
             @Override
@@ -81,7 +87,14 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
         int DEFAULT_INITIAL_OFFSET = 7;
         int finalOffset = offset == NO_SETTED ? DEFAULT_INITIAL_OFFSET : offset;
         vHover = findViewById(R.id.vHover);
+
         tvMonth = (TextView) findViewById(R.id.tvMonth);
+        if (monthListener != null) {
+            tvMonth.setClickable(true);
+            tvMonth.setOnTouchListener(monthListener);
+        }
+
+
         tvToday = (TextView) findViewById(R.id.tvToday);
         rvDays.setListener(this);
         tvToday.setOnClickListener(rvDays);
