@@ -26,7 +26,7 @@ public class Day {
     }
 
     public String getMonth() {
-        return date.toString("MMMM YYYY", Locale.getDefault());
+        return date.toString("MMM YYYY", Locale.getDefault());
     }
 
     public DateTime getDate() {
