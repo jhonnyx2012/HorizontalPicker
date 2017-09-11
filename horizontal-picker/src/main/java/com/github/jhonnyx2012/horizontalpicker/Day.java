@@ -12,6 +12,7 @@ import java.util.Locale;
 public class Day {
     private DateTime date;
     private boolean selected;
+    private String monthPattern = "MMMM YYYY";
 
     public Day(DateTime date) {
         this.date = date;
@@ -25,8 +26,13 @@ public class Day {
         return date.toString("EEE", Locale.getDefault()).toUpperCase();
     }
 
-    public String getMonth() {
-        return date.toString("MMMM YYYY", Locale.getDefault());
+    public String getMonth() { return getMonth(""); }
+
+    public String getMonth(String pattern) {
+        if (!pattern.isEmpty())
+            this.monthPattern = pattern;
+
+        return date.toString(monthPattern, Locale.getDefault());
     }
 
     public DateTime getDate() {
@@ -45,4 +51,5 @@ public class Day {
     public boolean isSelected() {
         return selected;
     }
+
 }
