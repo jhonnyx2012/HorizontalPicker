@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.joda.time.DateTime;
+import org.threeten.bp.LocalDate;
 
 /**
  * Created by Jhonny Barrios on 22/02/2017.
@@ -70,7 +70,7 @@ public class HorizontalPicker extends LinearLayout implements HorizontalPickerLi
         return this;
     }
 
-    public void setDate(final DateTime date) {
+    public void setDate(final LocalDate date) {
         rvDays.post(new Runnable() {
             @Override
             public void run() {

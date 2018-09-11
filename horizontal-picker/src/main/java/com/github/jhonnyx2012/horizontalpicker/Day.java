@@ -1,20 +1,18 @@
 package com.github.jhonnyx2012.horizontalpicker;
 
-import org.joda.time.DateTime;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
 
 /**
  * Created by jhonn on 28/02/2017.
  */
 public class Day {
-    private DateTime date;
+    private LocalDateTime date;
     private boolean selected;
     private String monthPattern = "MMMM YYYY";
 
-    public Day(DateTime date) {
+    public Day(LocalDateTime date) {
         this.date = date;
     }
 
@@ -23,7 +21,7 @@ public class Day {
     }
 
     public String getWeekDay() {
-        return date.toString("EEE", Locale.getDefault()).toUpperCase();
+        return DateTimeFormatter.ofPattern("EEE").format(date).toUpperCase();
     }
 
     public String getMonth() { return getMonth(""); }
@@ -31,17 +29,16 @@ public class Day {
     public String getMonth(String pattern) {
         if (!pattern.isEmpty())
             this.monthPattern = pattern;
-
-        return date.toString(monthPattern, Locale.getDefault());
+        return DateTimeFormatter.ofPattern(monthPattern).format(date);
     }
 
-    public DateTime getDate() {
-        return date.withTime(0,0,0,0);
+    public LocalDate getDate() {
+        return date.toLocalDate();
     }
 
     public boolean isToday() {
-        DateTime today=new DateTime().withTime(0,0,0,0);
-        return getDate().getMillis()==today.getMillis();
+        LocalDate today = LocalDate.now();
+        return getDate().isEqual(today);
     }
 
     public void setSelected(boolean selected) {

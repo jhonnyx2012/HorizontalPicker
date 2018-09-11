@@ -12,8 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
+import org.threeten.bp.LocalDate;
 
 /**
  * Created by Jhonny Barrios on 22/02/2017.
@@ -114,7 +113,7 @@ public class HorizontalPickerRecyclerView extends RecyclerView implements OnItem
 
     @Override
     public void onClick(View v) {
-        setDate(new DateTime());
+        setDate(LocalDate.now());
     }
 
     @Override
@@ -129,8 +128,8 @@ public class HorizontalPickerRecyclerView extends RecyclerView implements OnItem
         });
     }
 
-    public void setDate(DateTime date) {
-        DateTime today = new DateTime().withTime(0,0,0,0);
+    public void setDate(LocalDate date) {
+        LocalDate today = LocalDate.now();
         int difference = Days.daysBetween(date,today).getDays() * (date.getYear() < today.getMillis() ? -1 : 1);
         smoothScrollToPosition(offset+difference);
     }
