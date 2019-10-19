@@ -25,12 +25,12 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.6"
     }
@@ -43,8 +43,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:recyclerview-v7:25.1.1'
-    compile 'joda-time:joda-time:2.9.7'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+//    implementation 'joda-time:joda-time:2.9.7'
+    implementation 'net.danlew:android.joda:2.10.3'
 }
 
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
