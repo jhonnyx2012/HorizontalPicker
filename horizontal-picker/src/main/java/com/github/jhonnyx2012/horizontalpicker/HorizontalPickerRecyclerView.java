@@ -55,7 +55,8 @@ public class HorizontalPickerRecyclerView extends RecyclerView implements OnItem
                         mUnselectedDayTextColor);
                 setAdapter(adapter);
                 LinearSnapHelper snapHelper=new LinearSnapHelper();
-                snapHelper.attachToRecyclerView(HorizontalPickerRecyclerView.this);
+                if (HorizontalPickerRecyclerView.this.getOnFlingListener() == null)
+                    snapHelper.attachToRecyclerView(HorizontalPickerRecyclerView.this);
                 removeOnScrollListener(onScrollListener);
                 addOnScrollListener(onScrollListener);
             }
