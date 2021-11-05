@@ -18,10 +18,12 @@
             android:text="@string/today"
             android:clickable="true"
             android:background="?android:attr/selectableItemBackground"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:textColor="@color/colorPrimary"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:focusable="true" />
         <TextView
             android:id="@+id/tvMonth"
             android:layout_width="wrap_content"
@@ -44,9 +46,11 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="17dp">
+            android:layout_marginTop="17dp"
+            android:baselineAligned="false">
 
             <FrameLayout
+                android:id="@+id/ghost1"
                 android:layout_width="wrap_content"
                 android:layout_weight="3"
                 android:layout_height="match_parent"/>
@@ -58,6 +62,7 @@
                 android:layout_height="match_parent"
                 android:visibility="invisible" />
             <FrameLayout
+                android:id="@+id/ghost2"
                 android:layout_width="wrap_content"
                 android:layout_weight="3"
                 android:layout_height="match_parent"/>

@@ -1,55 +1,34 @@
-package com.github.jhonnyx2012.horizontalpicker;
+package com.github.jhonnyx2012.horizontalpicker
 
-import org.joda.time.DateTime;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import org.joda.time.DateTime
+import java.util.*
 
 /**
- * Created by jhonn on 28/02/2017.
+ * Created by jhonny on 28/02/2017.
  */
-public class Day {
-    private DateTime date;
-    private boolean selected;
-    private String monthPattern = "MMMM YYYY";
+class Day(private val date: DateTime) {
+    var isSelected = false
 
-    public Day(DateTime date) {
-        this.date = date;
+    private var monthPattern = "MMMM YYYY"
+
+    val day: String
+        get() = date.dayOfMonth.toString()
+
+    val weekDay: String
+        get() = date.toString("EEE", Locale.getDefault()).uppercase(Locale.getDefault())
+
+    fun getMonth(pattern: String): String {
+        if (pattern.isNotEmpty()) monthPattern = pattern
+        return date.toString(monthPattern, Locale.getDefault())
     }
 
-    public String getDay() {
-        return String.valueOf(date.getDayOfMonth());
+    fun getDate(): DateTime {
+        return date.withTime(0, 0, 0, 0)
     }
 
-    public String getWeekDay() {
-        return date.toString("EEE", Locale.getDefault()).toUpperCase();
-    }
-
-    public String getMonth() { return getMonth(""); }
-
-    public String getMonth(String pattern) {
-        if (!pattern.isEmpty())
-            this.monthPattern = pattern;
-
-        return date.toString(monthPattern, Locale.getDefault());
-    }
-
-    public DateTime getDate() {
-        return date.withTime(0,0,0,0);
-    }
-
-    public boolean isToday() {
-        DateTime today=new DateTime().withTime(0,0,0,0);
-        return getDate().getMillis()==today.getMillis();
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public boolean isSelected() {
-        return selected;
-    }
-
+    val isToday: Boolean
+        get() {
+            val today = DateTime().withTime(0, 0, 0, 0)
+            return getDate().millis == today.millis
+        }
 }

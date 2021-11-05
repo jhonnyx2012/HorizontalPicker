@@ -1,230 +1,213 @@
-package com.github.jhonnyx2012.horizontalpicker;
+package com.github.jhonnyx2012.horizontalpicker
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import org.joda.time.DateTime;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.AttributeSet
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import org.joda.time.DateTime
 
 /**
  * Created by Jhonny Barrios on 22/02/2017.
  */
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 
-public class HorizontalPicker extends LinearLayout implements HorizontalPickerListener {
+class HorizontalPicker @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : LinearLayout(context, attrs, defStyle), HorizontalPickerListener {
 
-    private static final int NO_SETTED = -1;
-    private View vHover;
-    private TextView tvMonth;
-    private TextView tvToday;
-    private DatePickerListener listener;
-    private OnTouchListener monthListener;
-    private HorizontalPickerRecyclerView rvDays;
-    private int days;
-    private int offset;
-    private int mDateSelectedColor = -1;
-    private int mDateSelectedTextColor = -1;
-    private int mMonthAndYearTextColor = -1;
-    private int mTodayButtonTextColor = -1;
-    private boolean showTodayButton = true;
-    private String mMonthPattern = "";
-    private int mTodayDateTextColor = -1;
-    private int mTodayDateBackgroundColor = -1;
-    private int mDayOfWeekTextColor = -1;
-    private int mUnselectedDayTextColor = -1;
+    private lateinit var rvDays: HorizontalPickerRecyclerView
+    private lateinit var vHover: View
+    private lateinit var tvMonth: TextView
+    private lateinit var tvToday: TextView
 
-    public HorizontalPicker(Context context) {
-        super(context);
-        internInit();
+    private var listener: DatePickerListener? = null
+    private var monthListener: OnTouchListener? = null
+
+    var days = NO_SET; private set
+    var offset = NO_SET; private set
+
+    @ColorInt private var mDateSelectedColor = -1
+    @ColorInt private var mDateSelectedTextColor = -1
+    @ColorInt private var mMonthAndYearTextColor = -1
+    @ColorInt private var mTodayButtonTextColor = -1
+    @ColorInt private var mTodayDateTextColor = -1
+    @ColorInt private var mTodayDateBackgroundColor = -1
+    @ColorInt private var mDayOfWeekTextColor = -1
+    @ColorInt private var mUnselectedDayTextColor = -1
+    private var mMonthPattern = ""
+    private var showTodayButton = true
+
+    fun setListener(listener: DatePickerListener): HorizontalPicker {
+        this.listener = listener
+        return this
     }
 
-    public HorizontalPicker(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        internInit();
-
+    fun setMonthListener(listener: OnTouchListener): HorizontalPicker {
+        monthListener = listener
+        return this
     }
 
-    public HorizontalPicker(Context context, @Nullable AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        internInit();
+    fun setDate(date: DateTime) {
+        rvDays.post { rvDays.setDate(date) }
     }
 
-    private void internInit() {
-        this.days = NO_SETTED;
-        this.offset = NO_SETTED;
-    }
-
-    public HorizontalPicker setListener(DatePickerListener listener) {
-        this.listener = listener;
-        return this;
-    }
-
-    public HorizontalPicker setMonthListener(OnTouchListener listener) {
-        this.monthListener = listener;
-        return this;
-    }
-
-    public void setDate(final DateTime date) {
-        rvDays.post(new Runnable() {
-            @Override
-            public void run() {
-                rvDays.setDate(date);
-            }
-        });
-    }
-
-    public void init() {
-        inflate(getContext(), R.layout.horizontal_picker, this);
-        rvDays = (HorizontalPickerRecyclerView) findViewById(R.id.rvDays);
-        int DEFAULT_DAYS_TO_PLUS = 120;
-        int finalDays = days == NO_SETTED ? DEFAULT_DAYS_TO_PLUS : days;
-        int DEFAULT_INITIAL_OFFSET = 7;
-        int finalOffset = offset == NO_SETTED ? DEFAULT_INITIAL_OFFSET : offset;
-        vHover = findViewById(R.id.vHover);
-
-        tvMonth = (TextView) findViewById(R.id.tvMonth);
+    @SuppressLint("ClickableViewAccessibility")
+    fun initialize() {
+        inflate(context, R.layout.horizontal_picker, this)
+        rvDays = findViewById(R.id.rvDays)
+        val finalDays = if (days == NO_SET) DEFAULT_DAYS_TO_PLUS else days
+        val finalOffset = if (offset == NO_SET) DEFAULT_INITIAL_OFFSET else offset
+        vHover = findViewById(R.id.vHover)
+        tvMonth = findViewById(R.id.tvMonth)
         if (monthListener != null) {
-            tvMonth.setClickable(true);
-            tvMonth.setOnTouchListener(monthListener);
+            tvMonth.isClickable = true
+            tvMonth.setOnTouchListener(monthListener)
+        }
+        tvToday = findViewById(R.id.tvToday)
+        rvDays.setListener(this)
+        tvToday.setOnClickListener(rvDays)
+        tvMonth.setTextColor(
+            if (mMonthAndYearTextColor != -1) mMonthAndYearTextColor else getColor(
+                R.color.primaryTextColor
+            )
+        )
+
+        tvToday.visibility = if (showTodayButton) VISIBLE else INVISIBLE
+        tvToday.setTextColor(if (mTodayButtonTextColor != -1) mTodayButtonTextColor else getColor(R.color.colorPrimary))
+
+        val mBackgroundColor = backgroundColor
+        setBackgroundColor(if (mBackgroundColor != Color.TRANSPARENT) mBackgroundColor else Color.WHITE)
+
+        mDateSelectedColor =
+            if (mDateSelectedColor == -1) getColor(R.color.colorPrimary) else mDateSelectedColor
+        mTodayDateTextColor =
+            if (mTodayDateTextColor == -1) getColor(R.color.primaryTextColor) else mTodayDateTextColor
+        mDayOfWeekTextColor =
+            if (mDayOfWeekTextColor == -1) getColor(R.color.secundaryTextColor) else mDayOfWeekTextColor
+        mUnselectedDayTextColor =
+            if (mUnselectedDayTextColor == -1) getColor(R.color.primaryTextColor) else mUnselectedDayTextColor
+
+        rvDays.initialize(
+            finalDays,
+            finalOffset,
+            mBackgroundColor,
+            mDateSelectedColor,
+            mDateSelectedTextColor,
+            mTodayDateTextColor,
+            mTodayDateBackgroundColor,
+            mDayOfWeekTextColor,
+            mUnselectedDayTextColor
+        )
+    }
+
+    private fun getColor(@ColorRes colorId: Int): Int {
+        return ContextCompat.getColor(context, colorId)
+    }
+
+    val backgroundColor: Int
+        get() {
+            var color = Color.TRANSPARENT
+            val background = background
+            if (background is ColorDrawable) color = background.color
+            return color
         }
 
-
-        tvToday = (TextView) findViewById(R.id.tvToday);
-        rvDays.setListener(this);
-        tvToday.setOnClickListener(rvDays);
-        tvMonth.setTextColor(mMonthAndYearTextColor != -1 ? mMonthAndYearTextColor : getColor(R.color.primaryTextColor));
-        tvToday.setVisibility(showTodayButton ? VISIBLE : INVISIBLE);
-        tvToday.setTextColor(mTodayButtonTextColor != -1 ? mTodayButtonTextColor : getColor(R.color.colorPrimary));
-        int mBackgroundColor = getBackgroundColor();
-        setBackgroundColor(mBackgroundColor != Color.TRANSPARENT ? mBackgroundColor : Color.WHITE);
-        mDateSelectedColor = mDateSelectedColor == -1 ? getColor(R.color.colorPrimary) : mDateSelectedColor;
-        mDateSelectedTextColor = mDateSelectedTextColor == -1 ? Color.WHITE : mDateSelectedTextColor;
-        mTodayDateTextColor = mTodayDateTextColor == -1 ? getColor(R.color.primaryTextColor) : mTodayDateTextColor;
-        mDayOfWeekTextColor = mDayOfWeekTextColor == -1 ? getColor(R.color.secundaryTextColor) : mDayOfWeekTextColor;
-        mUnselectedDayTextColor = mUnselectedDayTextColor == -1 ? getColor(R.color.primaryTextColor) : mUnselectedDayTextColor;
-        rvDays.init(
-                getContext(),
-                finalDays,
-                finalOffset,
-                mBackgroundColor,
-                mDateSelectedColor,
-                mDateSelectedTextColor,
-                mTodayDateTextColor,
-                mTodayDateBackgroundColor,
-                mDayOfWeekTextColor,
-                mUnselectedDayTextColor);
+    override fun post(action: Runnable): Boolean {
+        return rvDays.post(action)
     }
 
-    private int getColor(int colorId) {
-        return getResources().getColor(colorId);
-    }
-
-    public int getBackgroundColor() {
-        int color = Color.TRANSPARENT;
-        Drawable background = getBackground();
-        if (background instanceof ColorDrawable)
-            color = ((ColorDrawable) background).getColor();
-        return color;
-    }
-
-    @Override
-    public boolean post(Runnable action) {
-        return rvDays.post(action);
-    }
-
-    @Override
-    public void onStopDraggingPicker() {
-        if (vHover.getVisibility() == VISIBLE)
-            vHover.setVisibility(INVISIBLE);
-    }
-
-    @Override
-    public void onDraggingPicker() {
-        if (vHover.getVisibility() == INVISIBLE)
-            vHover.setVisibility(VISIBLE);
-    }
-
-    @Override
-    public void onDateSelected(Day item) {
-        tvMonth.setText(item.getMonth(mMonthPattern));
-        if (showTodayButton)
-            tvToday.setVisibility(item.isToday() ? INVISIBLE : VISIBLE);
-        if (listener != null) {
-            listener.onDateSelected(item.getDate());
+    override fun onStopDraggingPicker() {
+        if (vHover.visibility == VISIBLE) {
+            vHover.visibility = INVISIBLE
         }
     }
 
-    public HorizontalPicker setDays(int days) {
-        this.days = days;
-        return this;
+    override fun onDraggingPicker() {
+        if (vHover.visibility == INVISIBLE) {
+            vHover.visibility = VISIBLE
+        }
     }
 
-    public int getDays() {
-        return days;
+    override fun onDateSelected(item: Day) {
+        tvMonth.text = item.getMonth(mMonthPattern)
+        if (showTodayButton) {
+            tvToday.visibility = if (item.isToday) INVISIBLE else VISIBLE
+        }
+        listener?.onDateSelected(item.getDate())
     }
 
-    public HorizontalPicker setOffset(int offset) {
-        this.offset = offset;
-        return this;
+    fun setDays(days: Int): HorizontalPicker {
+        this.days = days
+        return this
     }
 
-    public int getOffset() {
-        return offset;
+    fun setOffset(offset: Int): HorizontalPicker {
+        this.offset = offset
+        return this
     }
 
-    public HorizontalPicker setDateSelectedColor(@ColorInt int color) {
-        mDateSelectedColor = color;
-        return this;
+    fun setDateSelectedColor(@ColorInt color: Int): HorizontalPicker {
+        mDateSelectedColor = color
+        return this
     }
 
-    public HorizontalPicker setDateSelectedTextColor(@ColorInt int color) {
-        mDateSelectedTextColor = color;
-        return this;
+    fun setDateSelectedTextColor(@ColorInt color: Int): HorizontalPicker {
+        mDateSelectedTextColor = color
+        return this
     }
 
-    public HorizontalPicker setMonthAndYearTextColor(@ColorInt int color) {
-        mMonthAndYearTextColor = color;
-        return this;
+    fun setMonthAndYearTextColor(@ColorInt color: Int): HorizontalPicker {
+        mMonthAndYearTextColor = color
+        return this
     }
 
-    public HorizontalPicker setTodayButtonTextColor(@ColorInt int color) {
-        mTodayButtonTextColor = color;
-        return this;
+    fun setTodayButtonTextColor(@ColorInt color: Int): HorizontalPicker {
+        mTodayButtonTextColor = color
+        return this
     }
 
-    public HorizontalPicker showTodayButton(boolean show) {
-        showTodayButton = show;
-        return this;
+    fun showTodayButton(show: Boolean): HorizontalPicker {
+        showTodayButton = show
+        return this
     }
 
-    public HorizontalPicker setTodayDateTextColor(int color) {
-        mTodayDateTextColor = color;
-        return this;
+    fun setTodayDateTextColor(@ColorInt color: Int): HorizontalPicker {
+        mTodayDateTextColor = color
+        return this
     }
 
-    public HorizontalPicker setTodayDateBackgroundColor(@ColorInt int color) {
-        mTodayDateBackgroundColor = color;
-        return this;
+    fun setTodayDateBackgroundColor(@ColorInt color: Int): HorizontalPicker {
+        mTodayDateBackgroundColor = color
+        return this
     }
 
-    public HorizontalPicker setDayOfWeekTextColor(@ColorInt int color) {
-        mDayOfWeekTextColor = color;
-        return this;
+    fun setDayOfWeekTextColor(@ColorInt color: Int): HorizontalPicker {
+        mDayOfWeekTextColor = color
+        return this
     }
 
-    public HorizontalPicker setUnselectedDayTextColor(@ColorInt int color) {
-        mUnselectedDayTextColor = color;
-        return this;
+    fun setUnselectedDayTextColor(@ColorInt color: Int): HorizontalPicker {
+        mUnselectedDayTextColor = color
+        return this
     }
 
-    public HorizontalPicker setMonthPattern(String pattern) {
-        mMonthPattern = pattern;
-        return this;
+    fun setMonthPattern(pattern: String): HorizontalPicker {
+        mMonthPattern = pattern
+        return this
+    }
+
+    companion object {
+        private const val DEFAULT_DAYS_TO_PLUS = 120
+        private const val DEFAULT_INITIAL_OFFSET = 7
+        private const val NO_SET = -1
     }
 }
